@@ -1,0 +1,36 @@
+#!/bin/bash
+
+
+if(( $# == 0 )); then
+	read -p "Dati numarul de numere:" n
+	read -p "Dati primul numar:" f
+	numbers=( )
+	numbers[$f]=$((${numbers[$f]}+1))
+	for(( i=2;i<=$n;++i )); do
+		read -p "Dati al $i-lea numar:" next
+		numbers[$next]=$((${numbers[$next]}+1))
+	done
+	max=1
+	nr=$f
+	for i in ${!numbers[@]}; do
+		if(( ${numbers[$i]} > $max )); then
+			max=${numbers[$i]}
+			nr=$i
+		fi
+	done
+	echo "Numarul $nr apare de $max ori"
+else
+	numbers=( )
+	for i in $@; do
+		numbers[$i]=$((${numbers[$i]}+1))
+	done
+	max=1
+	nr=$1
+	for i in ${!numbers[@]}; do
+		if(( ${numbers[$i]} > $max )); then
+			max=${numbers[$i]}
+			nr=$i
+		fi
+	done
+	echo "Numarul $nr apare de $max ori"
+fi

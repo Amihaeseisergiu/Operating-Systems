@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if(( $# == 0 )); then
+	echo "Nu a fost dat niciun parametru"
+	print -p "Dati doi parametri n,m:" n m
+elif(( $# > 2 )); then
+	echo "Au fost dati $# parametri"
+	print -p "Dati doi parametri n,m:" n m
+else n=$1 m=$2
+fi
+
+rez=$n
+for((i=1;i<=$(($m-1));++i)); do
+	rez=$(( $rez*$n ))
+done
+
+echo $rez

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if (( $# == 0 )); then
+	echo "Nu a fost dat niciun parametru"
+	read -p "Introduceti doi parametri n,m:" n m
+elif (( $# > 2 )); then
+	echo "Au fost introdusi $# parametri"
+	read -p "Introduceti 2 parametri n,m:" n m
+else n=$1 m=$2
+fi
+
+rez=0
+for ((i=1;i<=$m;++i)); do
+	rez=$(( $rez + $n ))
+done
+
+echo $rez

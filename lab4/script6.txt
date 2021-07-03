@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if(($# == 0)); then
+	read -p "Dati numarul de numere:" n
+	read -p "Dati primul numar:" f
+	max=$f
+	min=$f
+	for((i=2;i<=$n;++i)); do
+		read -p "Dati al $i-lea numar:" f
+		if((f > max)); then max=$f ; fi
+		if((f < min)); then min=$f ; fi
+	done
+else
+	shift
+	min=$1
+	max=$1
+	for i in $*; do
+		if(($i > $max )); then max=$i; fi
+		if(($i < $min )); then min=$i; fi
+	done
+fi
+
+echo "Minimul este $min , iar maximul este $max"

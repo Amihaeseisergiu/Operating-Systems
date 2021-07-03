@@ -1,0 +1,29 @@
+1.
+wc -l /etc/passwd
+grep -v "/bin/bash" /etc/passwd | wc-l 
+cat /etc/passwd | grep -v -c "/bin/bash"
+2.
+grep :202: /etc/passwd | cut -f1 -d: | wc -l
+grep -c :202: /etc/passwd | wc -l
+3.
+finger | grep pts | cut -d ' ' -f 1 | sort -u >> utilizatori-logati.txt
+who | cut -f1 -d" " | sort -u -o utilizatori-logati.txt
+4.
+cut -f7 -d: /etc/passwd | sort -u | less
+5.
+cut -f1 -d: /etc/passwd | grep -v "diana" | grep "ana" | wc -l
+6.
+ps -A -u sergiu.amihaesei | wc -l
+ps --no-headers -A -U sergiu.amihaesei | wc -l
+7.
+sort -n -t ':' -k3 /etc/passwd | cut -f3-4 -d: --output-delimiter="->" | cut -f1 -d,
+sort -n -t ':' -k3 /etc/passwd | cut -f1,3,4 -d: --output-delimiter=" " | awk '{print $3 "->" $2 "->" $1}' | less 
+cut -f3-5 -d: /etc/passwd --output-delimiter="->" | cut -f1 -d, | sort -n
+8.
+last sergiu.amihaesei | head -n1
+last sergiu.amihaesei | awk 'NR==1{print $4 " " $5 " " $6 " " $7 " " $3}'
+who | grep sergiu.amihaesei | tr -s " " | cut -d" " -f3-
+9.
+finger | awk 'NR>1{print $1 " " $(NF-3) " " $(NF-2) " " $(NF-1) " " $NF}' | sort -u -k1,1 | awk 'NR>=1 && NR<=15{print $1 " " $(NF-3) " " $(NF-2) " " $(NF-1) " " $NF}' | sort -k4,4
+last -15 | cut -c1-8,20-55 | grep -v wtmp
+who | tr -s " " | cut -d" " -f1,3-5 | sort -k 2,3 -t " " -r | head -15

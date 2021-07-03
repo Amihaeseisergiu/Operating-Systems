@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if(($# == 0)); then
+	read -p "Introduceti valoarea lui n:" n
+else n=$1
+fi
+
+if(($n<=2)); then
+	rez=$n
+else
+	f1=1
+	f2=2
+	for((i=2;i<=$n;++i)); do
+		rez=$(($f1+$f2))
+		f1=$f2
+		f2=$rez
+	done
+fi
+
+echo "Termenul de rang $n este:$rez"

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if (($# == 0)); then
+	echo "Nu ai introdus numele directorului"
+fi
+
+for text in `find $1 -maxdepth 1 -name "*.sh" -o -name "*.txt"`
+do
+	fisier1=`basename $text .sh`
+	fisier2=`basename $text .txt`
+	if [ "$1/$fisier2.txt" == $text ]; then
+		gzip -c $text > $1/"$fisier2.gz"
+	elif [ "$1/$fisier1.sh" == $text ]; then
+		zip $1/"$fisier1.zip" $text
+	fi
+done
+
+

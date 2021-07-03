@@ -1,0 +1,6 @@
+find . -depth -exec stat '{}' \;
+find . -name 'a*' -printf '%f %c %b\n' -o -name '*a' -printf '%f %c %b\n'
+sort -r /etc/passwd >> output.txt
+sort -n -t ':' -k3 /etc/passwd | less
+find . -perm /0050
+find . -type f -mtime 7 -printf '%a %M\n'

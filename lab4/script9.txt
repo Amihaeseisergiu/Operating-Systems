@@ -1,0 +1,28 @@
+#!/bin/bash
+
+function factorial()
+{
+	local rez=1
+	for((i=1;i<=$1;++i)); do
+		rez=$(( $rez*$i ))
+	done
+	echo $rez
+}
+
+if(( $# == 0 )); then
+	read -p "Dati doi parametri n,m:" n m
+elif(( $# == 1)); then
+	read -p "Dati parametrul m:" m
+	n=$1
+else
+	n=$1
+	m=$2
+fi
+
+numitor=$(factorial n)
+prod1=$(factorial m)
+dif=$(($n - $m))
+prod2=$(factorial dif)
+numarator=$(($prod1*$prod2))
+
+echo "scale=5; $numitor/$numarator" | bc -l

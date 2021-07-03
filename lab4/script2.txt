@@ -1,0 +1,25 @@
+#!/bin/bash
+
+function patrat()
+{
+	if (( $1 == 1 )); then
+		rez=1
+	else
+		let n_1=$1-1
+		patrat $n_1
+		let rez=$1*$1+rez
+	fi
+}
+
+	if (( $# == 0 )); then
+		echo "Scriptul nu are parametri"
+		read -p "Dati un parametru:" nr
+	elif (( $# > 1 )); then
+		echo "Ati introdus $# parametri"
+		read -p "Dati un singur parametru:" nr
+	else nr=$1
+
+	fi
+
+patrat $nr
+echo $rez

@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if(($# == 0)); then
+	read -p "Dati un director:" dir
+else dir=$1
+fi
+
+max=0
+nr=0
+function calcul()
+{
+	for f in `ls -A $1`
+	do
+		cale=$1/$f
+		if [[ -d $cale ]] ; then
+			calcul $cale
+		elif [[ `file $f` == "$f: ASCII text"  ]] ; then
+			nr=$(($nr + `cat $cale | wc -w`))
+			if((`cat $cale | wc -L` > $max)); then
+				save=$cale
+				max=`cat $cale | wc -L`
+			fi
+		fi
+	done
+}
+
+calcul $dir
+echo "Numarul maxim de linii din $dir este $max iar numarul total de cuvinte este $nr din $save"

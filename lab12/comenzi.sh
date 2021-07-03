@@ -1,0 +1,3 @@
+ls
+ps uxu
+exit

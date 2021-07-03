@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [[ ! -d ~/html/imagini ]] ; then mkdir ~/html/imagini
+fi
+touch ~/html/colaj.html
+chmod o+r ~/html/colaj.html
+chmod o+x ~/html/imagini
+chmod o+x ~
+chmod o+x ~/html
+echo "<HTML>" > ~/html/colaj.html
+echo "<HEAD>" >> ~/html/colaj.html
+echo "<TITLE>PLAYLIST</TITLE>" >> ~/html/colaj.html
+echo "</HEAD>" >> ~/html/colaj.html
+echo "<BODY>" >> ~/html/colaj.html
+
+for f in `ls -Rt ~ | find -name *.jpg -o -name *.gif -o -name *.png`
+do
+	ln $f ~/html/imagini
+	echo "<a href=imagini/`basename $f`>`basename $f`</a>" >> ~/html/colaj.html
+done
+echo "</BODY>" >> ~/html/colaj.html
+echo "</HTML>" >> ~/html/colaj.html

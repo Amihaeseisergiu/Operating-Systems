@@ -1,0 +1,40 @@
+#!/bin/bash
+
+if(($# == 0)); then
+	read -p "Dati un director:" dir
+else
+	dir=$1
+fi
+
+nrd=0
+nrh=0
+nrl=0
+function calcul()
+{
+local nr1=0
+local nr2=0
+local nr3=0
+for f in `ls -A $1`
+do
+	cale=$1/$f
+	if [[ -d $cale ]] ; then
+		local cpy1=$nrh
+		local cpy2=$nrl
+		local cpy3=$nrd
+		calcul $cale
+		nrd=$(($nrd+1))
+		nr1=$(($nr1+ (($nrh - $cpy1)) ))
+		nr2=$(($nr2+ (($nrl - $cpy2)) ))
+		nr3=$(($nr3+ (($nrd - $cpy3)) ))
+	elif [[ -f $cale && "$(basename "$cale")" == .* ]] ; then
+		nrh=$(($nrh+1))
+		nr1=$(($nr1+1))
+	elif [[ -L $cale ]] ; then
+		nrl=$(($nrl+1))
+		nr2=$(($nr2+1))
+	fi
+done
+echo "Directorul $1 are $nr1 fisiere ascunse,$nr2 linkuri simbolice si $nr3 subdirectoare"
+}
+
+calcul $dir

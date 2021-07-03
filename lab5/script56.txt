@@ -1,0 +1,11 @@
+#!/bin/bash
+read -p "Dati nr de utilizatori:" nr
+for ((i=1;i<=$nr;i++)); do
+
+	read -p "Dati numele utilizatorului $i:" user
+	if [[ `last -w | grep $user | head -n1 | cut -f1 -d" "` == $user ]] ; then
+		echo -e  "\n $(last -w | grep $user | grep `date | cut -f2 -d" "` | head -n3)"
+	else echo "Utilizatorul $user nu s-a conectat niciodata!"
+
+	fi
+done

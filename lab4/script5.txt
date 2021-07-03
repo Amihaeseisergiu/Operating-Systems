@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if(( $# < 2 )); then
+	echo "Nu sunt destui parametri"
+	read -p "Dati numarul de numere:" n
+	sum=0
+	for((i=1;i<=$n;i++)); do
+		read -p "Dati al $i-lea numar:" tmp
+		sum=$(($sum+$tmp))
+	done
+else
+	shift
+	n=$#
+	sum=0
+	for i in $*; do
+		sum=$(( sum + $i ))
+	done
+fi
+
+echo "scale=5; $sum/$n" | bc -l
+

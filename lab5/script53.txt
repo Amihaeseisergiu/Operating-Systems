@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if(($# == 0)); then
+	read -p "Dati un director:" dir
+else dir=$1
+fi
+
+function calcul()
+{
+	for f in `ls -A $1`
+	do
+		cale=$1/$f
+		if [[ -d $cale ]] ; then
+			calcul $cale
+		elif [[ $f == *.txt ]] ; then
+			mv $cale "$1/`basename $f .txt`.ascii"
+		fi
+	done
+}
+
+calcul $dir
+

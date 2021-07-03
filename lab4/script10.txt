@@ -1,0 +1,33 @@
+#!/bin/bash
+
+if(( $# == 0)); then
+	read -p "Dati N:" N
+	suma=0
+	for((i=1;i<=$N;++i)); do
+		read -p "Dati al $i-lea numar:" nr
+		suma=$(($suma+$nr))
+	done
+	echo "Suma este $suma"
+else
+	N=$1
+	shift
+	cont=0
+	while(( $# >= $N )); do
+		suma=0
+		cont=$(($cont+1))
+		for((i=1;i<=$N;++i)); do
+			suma=$(($suma+$1))
+			shift
+		done
+		echo "Suma secventei $cont este $suma"
+		echo "Suma secventei $cont este $suma" >> output.txt
+	done
+
+	suma=0
+	for((i=1;i<=$#;++i)); do
+		suma=$(($suma+$1))
+		shift
+	done
+	echo "Suma ultimei secvente este $suma"
+	echo "Suma ultimei secvente este $suma" >> output.txt
+fi
